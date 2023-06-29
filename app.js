@@ -3,7 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
-const mongoConnect = require('./util/database').mongoConnect;
+const mongoConnect = require( './util/database' ).mongoConnect;
+const dotenv = require("dotenv")
+dotenv.config()
 
 const app = express();
 
@@ -31,5 +33,5 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 mongoConnect(() => {
-  app.listen(8000);
+  app.listen(process.env.PORT);
 })

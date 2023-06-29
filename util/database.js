@@ -1,12 +1,12 @@
-const mongodb = require('mongodb');
+const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
+const dotenv = require("dotenv");
+dotenv.config();
 
 let _db;
 
-const mongoConnect = callback => {
-  MongoClient.connect(
-    "mongodb+srv://ram:1234@cluster0.ddeqcar.mongodb.net/test"
-  )
+const mongoConnect = (callback) => {
+  MongoClient.connect(process.env.MONOGODB_CONNECT)
     .then((client) => {
       console.log("Connected!");
       _db = client.db();
@@ -22,7 +22,7 @@ const getDb = () => {
   if (_db) {
     return _db;
   }
-  throw 'No database found!';
+  throw "No database found!";
 };
 
 exports.mongoConnect = mongoConnect;
